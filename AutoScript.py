@@ -182,9 +182,9 @@ class Tools:
     def calculate_network_mask(self, band):
 
         """Receives a String with an IPv4 BAND (Ex. 192.168.0.0/24) separates the IP by octets and bit of the mask and
-         performs the calculations to identify the valid IPs and Broadcast, returns four strings,
-         the first available IP of the range, the last available IP of the range, the last valid IP assigned as Gateway, 
-        Broadcast IP, and the calculated Netmask, any value identified as invalid is returned <None>."""
+         performs the calculations to identify the valid IPs and Broadcast, returns four strings, the first available
+         IP of the range, the last available IP of the range, the last valid IP assigned as Gateway, Broadcast IP,
+         and the calculated Netmask, any value identified as invalid is returned <None>."""
 
         self.calc_netw_band = band
         self.calc_netw_fOcteto, self.calc_netw_sOcteto, self.calc_netw_tOcteto, self.calc_netw_qOcteto_mask = \
