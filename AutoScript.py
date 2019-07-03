@@ -45,7 +45,8 @@ License Identifiers that are here available: http://spdx.org/licenses/'''
 
 
 class Tools:
-    """This class contains functions for checks and validations and can be used by several points of the code"""
+
+    """This class contains functions for checks and validations"""
 
     def __init__(self):
 
@@ -120,7 +121,7 @@ class Tools:
 
     def centralize_message(self, message):
 
-        """It receives a String and centers with 80 pixels on each side of the character <bar n>"""
+        """Center with 80 pixels on each side of the character <\n>"""
 
         self.cent_message = message
         center = '\n'.join('{:^80}'.format(s) for s in message.split('\n'))
@@ -128,7 +129,7 @@ class Tools:
 
     def validate_octets(self, ip):
 
-        """Receives an IPv4 IP string and checks if it is valid"""
+        """Receives an IPv4 IP and checks if it is valid"""
 
         self.valid_octe_ip = ip
         self.valid_octe_ip = self.valid_octe_ip.split('.')
@@ -149,9 +150,9 @@ class Tools:
 
     def validate_range_ip(self, bit, qocteto):
 
-        """Receives a String with the fourth octet (Ex. 10.0.0.4/30 - fourth octet = 4) of the IPV4 range and another
-        String with the bit value (CIDR) of the Network Mask (Ex. 10.0.0.4/30 - CIDR = 30) and performs a comparison
-        to identify whether the mask conforms to the IP BAND reported, returns boolean."""
+        """Receives the fourth octet (Ex. 10.0.0.4/30 - fourth octet = 4) of the IPV4 range and the bit value (CIDR)
+         of the netmask (Ex. 10.0.0.4/30 - CIDR = 30) and performs a comparison to identify whether the mask conforms
+         to the reported IP range."""
 
         self.vali_rang_qOcteto = qocteto
         self.vali_rang_bits = int(bit)
@@ -181,10 +182,10 @@ class Tools:
 
     def calculate_network_mask(self, band):
 
-        """Receives a String with an IPv4 BAND (Ex. 192.168.0.0/24) separates the IP by octets and bit of the mask and
-         performs the calculations to identify the valid IPs and Broadcast, returns four strings, the first available
-         IP of the range, the last available IP of the range, the last valid IP assigned as Gateway, Broadcast IP,
-         and the calculated Netmask, any value identified as invalid is returned <None>."""
+        """Receives a range of IPv4 (Ex. 192.168.0.0/24) separates the IP by octets and bit of the mask and performs
+        the calculations to identify which are the valid IPs and the Broadcast, returns the first available IP of the
+        range, the last available IP of the range, the last valid IP assigned as Gateway, IP Broadcast, and the
+        Calculated Network Mask."""
 
         self.calc_netw_band = band
         self.calc_netw_fOcteto, self.calc_netw_sOcteto, self.calc_netw_tOcteto, self.calc_netw_qOcteto_mask = \
@@ -256,9 +257,7 @@ class Tools:
 
     def search_in_ticket(self, tag, data, pattern):
 
-        """Receives a String as a reference for comparison to be searched within a List that is received as a parameter,
-         another String is also received to be applied on the search result to perform a filter on the characters that
-         will be returned."""
+        """Searches for a specified string within a list and returns only the required information."""
 
         self.sear_tick_tag = tag
         self.sear_tick_data = data
@@ -278,8 +277,7 @@ class Tools:
 
     def search_in_template(self, tag, data):
 
-        """It receives a String with the reference to be searched in a list also received and when found is returned
-        the number of the line where the searched content is."""
+        """Searches for a specified string within a list and returns only the required information."""
 
         self.sear_temp_tag = tag
         self.sear_temp_data = data
@@ -299,8 +297,8 @@ class Tools:
 
     def validate_range_extension(self, extensions):
 
-        """You receive a String with the extension or a range of extensions to check,
-           Ex. 1932000000 or 1932000000~1932000099"""
+        """Receives an extension or a range of extensions to and performs a pattern check.
+        Ex. 1932000000 or 1932000000 ~ 1932000099"""
 
         self.vali_rang_exten = extensions
         if '~' in self.vali_rang_exten:
@@ -327,9 +325,7 @@ class Tools:
 
     def run_range_extension(self, tag, new_extension, extension, template):
 
-        """Receives a String <tag> that will be searched within <template>, <new_extension> a counter of the amounts of
-         extensions to be configured, <extension> an already validated extension and the default <template> settings.
-         Insert in the template the according to the processed extensions."""
+        """Inserts numbers of extensions into the model according to the growing sequence received."""
 
         self.run_ran_ext_tag = tag
         self.run_ran_ext_new_extension = new_extension
@@ -386,8 +382,7 @@ class Tools:
 
     def run_key_extension(self, tag, extension, template):
 
-        """It receives a String with the extension to be inserted in the template, performs the comparison to identify
-        which variant numbers"""
+        """Inserts a unique extension number.."""
 
         self.run_key_ext_tag = tag
         self.run_key_ext_extension = extension
