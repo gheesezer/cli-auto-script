@@ -577,8 +577,11 @@ class OS:
             self.size_circ = len(self.circuit)
             if self.size_circ <= 10:
                 return self.circuit
+            else:
+                print(tools.centralize_message('\nDigite no máximo até 10 números!'))
+                time.sleep(2)
         else:
-            print(tools.centralize_message('\nDigite Apenas Números'))
+            print(tools.centralize_message('\nDigite Apenas Números!'))
             time.sleep(2)
             return None
 
@@ -592,11 +595,11 @@ class OS:
             if 0 < self.vlan <= 4000:
                 return str(self.vlan)
             else:
-                print(tools.centralize_message('\nDigite Vlan entre 1 e 4000'))
+                print(tools.centralize_message('\nDigite Vlan entre 1 e 4000!'))
                 time.sleep(2)
                 return None
         else:
-            print(tools.centralize_message('\nDigite Apenas Números'))
+            print(tools.centralize_message('\nDigite Apenas Números!'))
             time.sleep(2)
             return None
 
@@ -627,6 +630,8 @@ class OS:
             else:
                 return None
         else:
+            print(tools.centralize_message('\nDigite Apenas Números!'))
+            time.sleep(2)
             return None
 
     def validate_signaling(self, signaling):
@@ -658,7 +663,7 @@ class OS:
             if 0 < self.channel <= 30:
                 return str(self.channel)
             else:
-                print(tools.centralize_message('\nDigite Canais entre 1 e 30'))
+                print(tools.centralize_message('\nDigite Canais entre 1 e 30!'))
                 time.sleep(2)
                 return None
         else:
@@ -874,8 +879,6 @@ class Product:
                     '\n\n\n Circuito de Internet Link > ')
                 self.circ_circuit_inter = self.facilities.validate_circuit(self.circ_circuit_inter)
                 if self.circ_circuit_inter is None:
-                    print(tools.centralize_message('\nCircuito de Internet Link Invalido'))
-                    time.sleep(2)
                     continue
                 else:
                     self.circ_template_inter[self.circ_linenumber_inter] = self.circ_template_inter[
@@ -905,8 +908,6 @@ class Product:
                     main.banner + '\n\n\nDigite Vlan de Internet Link:\tEx. 10') + '\n\n\n Vlan de Internet Link > ')
                 self.vl_vlan_inter = self.facilities.validate_vlan(self.vl_vlan_inter)
                 if self.vl_vlan_inter is None:
-                    print(tools.centralize_message('\nVlan de Internet Link Invalida'))
-                    time.sleep(2)
                     continue
                 else:
                     for self.vl_string_inter in range(self.vl_occurrence_inter):
@@ -955,12 +956,12 @@ class Product:
                     self.wan_inter_fband, self.wan_inter_lband, self.wan_inter_ipGateway, self.wan_inter_broadcast, \
                     self.wan_inter_mask = (self.facilities.validate_wan(self.wan_inter_wan))
                 except ValueError:
-                    print(tools.centralize_message('\n Entrada Invalida'))
+                    print(tools.centralize_message('\n Entrada Invalida!'))
                     time.sleep(2)
                     self.wan_inter_wan = None
                     continue
                 except TypeError:
-                    print(tools.centralize_message('\n Faixa de Wan Invalida'))
+                    print(tools.centralize_message('\n Faixa de Wan Invalida!'))
                     time.sleep(2)
                     self.wan_inter_wan = None
                     continue
@@ -1045,12 +1046,12 @@ class Product:
                     self.lan_inter_fband, self.lan_inter_lband, self.lan_inter_ipGateway, self.lan_inter_broadcast, \
                     self.lan_inter_mask = (self.facilities.validate_lan(self.lan_inter_lan))
                 except ValueError:
-                    print(tools.centralize_message('\n Entrada Invalida'))
+                    print(tools.centralize_message('\n Entrada Invalida!'))
                     time.sleep(2)
                     self.lan_inter_lan = None
                     continue
                 except TypeError:
-                    print(tools.centralize_message('\n Faixa de Lan Invalida'))
+                    print(tools.centralize_message('\n Faixa de Lan Invalida!'))
                     time.sleep(2)
                     self.lan_inter_lan = None
                     continue
@@ -1116,8 +1117,6 @@ class Product:
                                                '\n\n\n Velocidade de Internet Link > ')
                 self.speed_speed_inter = self.facilities.validate_speed(self.speed_speed_inter)
                 if self.speed_speed_inter is None:
-                    print(tools.centralize_message('\nVelocidade de Internet Link Invalida'))
-                    time.sleep(2)
                     continue
                 else:
                     self.speed_linenumber_inter = tools.search_in_template(self.facilities.os_inter_speed_tag2,
@@ -1151,8 +1150,6 @@ class Product:
                                                + '\n\n\n Circuito de Voz Total > ')
                 self.circ_circuit_voip = self.facilities.validate_circuit(self.circ_circuit_voip)
                 if self.circ_circuit_voip is None:
-                    print(tools.centralize_message('\nCircuito de Voz Total Invalido'))
-                    time.sleep(2)
                     continue
                 else:
                     self.circ_template_voip[self.circ_linenumber_voip] = self.circ_template_voip[
@@ -1182,8 +1179,6 @@ class Product:
                     main.banner + '\n\n\nDigite Vlan Voz Total:\tEx. 11') + '\n\n\n Vlan de Voz Total > ')
                 self.vl_vlan_voip = self.facilities.validate_vlan(self.vl_vlan_voip)
                 if self.vl_vlan_voip is None:
-                    print(tools.centralize_message('\nVlan de Voz Total Invalida'))
-                    time.sleep(2)
                     continue
                 else:
                     for self.vl_string_voip in range(self.vl_occurrence_voip):
@@ -1224,12 +1219,12 @@ class Product:
                     self.wan_voip_fband, self.wan_voip_lband, self.wan_voip_ipGateway, self.wan_voip_broadcast, \
                     self.wan_voip_mask = (self.facilities.validate_wan(self.wan_voip_wan))
                 except ValueError:
-                    print(tools.centralize_message('\n Entrada Invalida'))
+                    print(tools.centralize_message('\n Entrada Invalida!'))
                     time.sleep(2)
                     self.wan_voip_wan = None
                     continue
                 except TypeError:
-                    print(tools.centralize_message('\n Faixa de Wan Invalida'))
+                    print(tools.centralize_message('\n Faixa de Wan Invalida!'))
                     time.sleep(2)
                     self.wan_voip_wan = None
                     continue
@@ -1282,12 +1277,12 @@ class Product:
                     self.lan_voip_fband, self.lan_voip_lband, self.lan_voip_ipGateway, self.lan_voip_broadcast, \
                     self.lan_voip_mask = (self.facilities.validate_lan(self.lan_voip_lan))
                 except ValueError:
-                    print(tools.centralize_message('\n Entrada Invalida'))
+                    print(tools.centralize_message('\n Entrada Invalida!'))
                     time.sleep(2)
                     self.lan_voip_lan = None
                     continue
                 except TypeError:
-                    print(tools.centralize_message('\n Faixa de Lan Invalida'))
+                    print(tools.centralize_message('\n Faixa de Lan Invalida!'))
                     time.sleep(2)
                     self.lan_voip_lan = None
                     continue
@@ -1370,8 +1365,6 @@ class Product:
                     main.banner + '\n\n\nDigite Canais de Voz Total:\tEx. 30') + '\n\n\n Canais de Voz Total > ')
                 self.ch_channel_voip = self.facilities.validate_channel(self.ch_channel_voip)
                 if self.ch_channel_voip is None:
-                    print(tools.centralize_message('\nCanais de Voz Total Invalido'))
-                    time.sleep(2)
                     continue
                 else:
                     for self.ch_string_voip in range(self.ch_occurrence_voip):
@@ -1398,7 +1391,6 @@ class Product:
         self.man_add_ran_template = template
         while self.man_add_ran_new_exten != -1:
             os.system('cls')
-            print(tools.centralize_message(main.banner))
             self.man_add_ran_exten = input(tools.centralize_message(
                 main.banner + '\nDigite os Ramais:\tEx. 1935544900~1935544999 ou 1935544900') + '\n\n Ramal > ')
             self.man_add_ran_check = tools.validate_range_extension(self.man_add_ran_exten)
@@ -1451,7 +1443,6 @@ class Product:
     def man_add_key(self, template):
         self.man_add_key_template = template
         os.system('cls')
-        print(tools.centralize_message(main.banner))
         self.man_add_key_exten = input(
             tools.centralize_message(main.banner + '\nDigite numero chave:  Ex.\t1935544900\n') + '\n\n Chave > ')
         self.man_add_key_check = tools.validate_range_extension(self.man_add_key_exten)
@@ -1509,11 +1500,22 @@ class Product:
                     else:
                         self.bi_template_voip = self.man_add_range(self.bi_template_voip)
                         return self.bi_template_voip
+
                 elif self.bi_billing_voip == '2':
-                    self.bi_template_voip = self.auto_add_key(self.bi_template_voip, self.bi_ticket_voztotal)
-                    return self.bi_template_voip
+                    if self.bi_ticket_voztotal is None:
+                        self.bi_billing_extension = None
+                    else:
+                        self.bi_billing_extension = tools.search_in_ticket(self.facilities.os_voip_billing_tag2,
+                                                                           self.bi_ticket_voztotal,
+                                                                           self.facilities.os_voip_extension_pattern)
+                    if self.bi_billing_extension is not None:
+                        self.bi_template_voip = self.auto_add_key(self.bi_template_voip, self.bi_ticket_voztotal)
+                    else:
+                        self.bi_template_voip = self.man_add_key(self.bi_template_voip)
+                        return self.bi_template_voip
                 else:
-                    print(tools.centralize_message('\nEntrada Invalida'))
+                    print(tools.centralize_message('\nEntrada Invalida!'))
+                    time.sleep(2)
             else:
                 if self.bi_billing_voip == 'Rml':
                     self.facilities.os_voip_extension_tag += str(self.bi_new_extension) + ': '
@@ -1547,7 +1549,7 @@ class Product:
 
             self.audio_ivr2_template = list(self.audio_ivr2_archive.readlines())
         except TypeError:
-            print(tools.centralize_message('\nTemplate Não Localizado'))
+            print(tools.centralize_message('\nTemplate Não Localizado!'))
             time.sleep(2)
 
         if self.prod_tickets is None:
@@ -1887,7 +1889,7 @@ class RunAudiocodes:
                                                               baudrate=115200, parity="N", stopbits=1, bytesize=8,
                                                               timeout=8)
                 except BaseException:
-                    print(tools.centralize_message('\nPorta COM Indisponível'))
+                    print(tools.centralize_message('\nPorta COM Indisponível!'))
                     time.sleep(2)
                     continue
                 if self.audio_conect_console.isOpen():
@@ -2378,16 +2380,13 @@ class Main(object):
                 os.system('cls')
                 self.dis_fin_product = input(tools.centralize_message(self.banner +
                                                                       '\n\n\nESCOLHA O PRODUTO:'
-                                                                      '\n\n1 - Internet Link + Voz Total R2'
-                                                                      '\n2 - Internet Link'
-                                                                      '\n3 - Voz Total') + '\n\n\n Produto >\t')
+                                                                      '\n\n1 - Internet Link + Voz Total R2')
+                                             + '\n\n\n Produto >\t')
                 if self.dis_fin_product == '1':
                     return 'Internet Link + Voz Total R2'
-                elif self.dis_fin_product == '2':
-                    return 'Internet Link'
-                elif self.dis_fin_product == '3':
-                    return 'Voz Total'
                 else:
+                    print(tools.centralize_message('\nOpção Invalida!'))
+                    time.sleep(2)
                     continue
             else:
                 for self.dis_fin_string in self.dis_fin_tickets.keys():
@@ -2400,10 +2399,6 @@ class Main(object):
                 if 'Internet Link' in self.dis_fin_final_product and 'Voz Total R2' in self.dis_fin_final_product and \
                         'Ponto de Acesso' in self.dis_fin_final_product:
                     return 'Internet Link + Voz Total R2'
-                elif 'Internet Link' in self.dis_fin_final_product:
-                    return 'Internet Link'
-                elif 'Voz Total R2' in self.dis_fin_final_product:
-                    return 'Voz Total R2'
                 else:
                     self.dis_fin_tickets = None
                     continue
