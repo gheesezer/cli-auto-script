@@ -1,6 +1,5 @@
 #
-#
-# Guilherme César Da Silva <dasilvaguilhermecesar@gmail.com>
+# Autor: Guilherme César Da Silva <dasilvaguilhermecesar@gmail.com>
 #
 # AutoScript for Windows OS
 #
@@ -408,8 +407,8 @@ class Tools:
 
     def compare_range(self, extensions):
 
-        """It receives a String with the extension to be inserted in the template, performs the comparison to identify
-        which variant numbers"""
+        """Compares two telephone numbers and identifies the variations, changes the variation by 'X' which equals
+            0 ~ 9 on the router"""
 
         self.comp_rang_exten = extensions
         self.comp_rang_gama = self.comp_rang_exten.split('~')
@@ -427,6 +426,7 @@ class Tools:
 
 
 class OS:
+
     """This class is responsible for the attributes of the service order that is reported by the user."""
 
     def __init__(self):
@@ -527,7 +527,7 @@ class OS:
 
     def validate_id(self, id_os):
 
-        """You receive a String with the Service Order number"""
+        """Validates the size of the Service Order number entered by the user."""
 
         self.id_os = id_os
         if self.id_os.isnumeric():
@@ -535,16 +535,16 @@ class OS:
             if self.size_id <= 6:
                 return self.id_os
             else:
-                print(tools.centralize_message('\nOrdem de Serviço tem Apenas 6 Números'))
+                print(tools.centralize_message('\nOrdem de Serviço tem Apenas 6 Números!'))
                 time.sleep(2)
         else:
-            print(tools.centralize_message('\nDigite Apenas Números'))
+            print(tools.centralize_message('\nDigite Apenas Números!'))
             time.sleep(2)
             return False  #
 
     def validate_product(self, product):
 
-        """You receive a String with product name"""
+        """Validates whether it is a valid product to be configured."""
 
         self.product = product
         if self.product == 'Internet Link':
@@ -558,7 +558,7 @@ class OS:
 
     def validate_hostname(self, hostname):
 
-        """Receive a String with hostname of the device"""
+        """Validate the hostname accepted by the router."""
 
         self.hostname = hostname
         self.size_host = len(self.hostname)
@@ -570,7 +570,7 @@ class OS:
 
     def validate_circuit(self, circuit):
 
-        """Receive a String with the product registration circuit"""
+        """Validate the circuit pattern to be configured."""
 
         self.circuit = circuit
         if self.circuit.isnumeric():
@@ -587,7 +587,7 @@ class OS:
 
     def validate_vlan(self, vlan):
 
-        """It receives a String with the vlan number of the product"""
+        """Validate the range of valid vlans."""
 
         self.vlan = vlan
         if self.vlan.isnumeric():
@@ -605,21 +605,21 @@ class OS:
 
     def validate_wan(self, wan):
 
-        """Receives a String with the IP range to be used in the equipment WAN"""
+        """Validates the range and calculates valid WAN IPs."""
 
         self.wan = wan
         return tools.calculate_network_mask(self.wan)
 
     def validate_lan(self, lan):
 
-        """Receive a String with the IP range to be used in the equipment LAN"""
+        """Validates the range and calculates valid LAN IPs."""
 
         self.lan = lan
         return tools.calculate_network_mask(self.lan)
 
     def validate_speed(self, speed):
 
-        """Get a String with the link speed"""
+        """Calculates and converts the reported speed in Mbps to bps."""
 
         self.speed = speed
         if self.speed.isnumeric():
@@ -636,8 +636,7 @@ class OS:
 
     def validate_signaling(self, signaling):
 
-        """Receives a String with the Voice Service signaling pattern, compares the flag
-        and if it does not find it is returned <None>."""
+        """Validates the voice signal to be configured."""
 
         self.signaling = signaling
         if self.signaling == 'R2':
@@ -647,15 +646,14 @@ class OS:
 
     def validate_sbc(self, sbc):
 
-        """Receives a String with an IP to be used on the SBC voice server assigned to the machine"""
+        """Validates the SBC IP octets."""
 
         self.sbc = sbc
         return tools.validate_octets(self.sbc)
 
     def validate_channel(self, channel):
 
-        """Receives a String with the number of voice channels that will be configured, checks
-        if the quantity is compatible with the equipment"""
+        """Validates the valid channel interval for configuration."""
 
         self.channel = channel
         if self.channel.isnumeric():
@@ -673,9 +671,11 @@ class OS:
 
 
 class Product:
+
     """This class is responsible for identifying the type of product that will be configured in the equipment"""
 
     def __init__(self, equipment, product, tickets):
+
         self.prod_equipment = equipment
         self.prod_product = product
         self.prod_tickets = tickets
@@ -790,7 +790,7 @@ class Product:
         self.lan_voip_line_number = 0
 
         self.sbc_voip_sbc = ''
-        self.sbc_template_voip = []
+        self.sbc_voip_template = []
         self.sbc_linenumber_voip = 0
         self.sbc_occurrence_voip = 0
         self.sbc_string_voip = ''
@@ -831,11 +831,11 @@ class Product:
         self.bi_new_extension = 0
         self.bi_billing_extension = ''
 
+        self.gener_template = []
+
     def hostname(self, hostname, template):
 
-        """It receives the hostname and configuration template, if the <hostname> is equal to <None> the user is
-        prompted to enter manually. If the <hostname> is a String with valid content it is replaced in the correct
-        place inside the template."""
+        """Enter the "hostname" of the router in the default configuration template."""
 
         self.host_hostname = hostname
         self.host_template = template
@@ -862,9 +862,7 @@ class Product:
 
     def circuit_inter(self, circuit, template):
 
-        """It receives the internet circuit and the configuration template, if <circuit> is equal to <None> the user is
-         prompted to enter manually. If the <circuit> is a String with valid content it is replaced in the correct place
-          within the template."""
+        """Enter the circuit number in the default configuration template."""
 
         self.circ_circuit_inter = circuit
         self.circ_template_inter = template
@@ -892,9 +890,7 @@ class Product:
 
     def vlan_inter(self, vlan, template):
 
-        """You receive the vlan from the internet and the configuration template, if <vlan> is equal to <None> the user
-        is prompted to enter manually. If <vlan> is a String with valid content it is replaced in the correct place
-        within the template."""
+        """Inserts the Internet VLAN into the default configuration template.."""
 
         self.vl_vlan_inter = vlan
         self.vl_template_inter = template
@@ -927,9 +923,7 @@ class Product:
 
     def wan_inter(self, wan, template):
 
-        """It receives the Internet WAN IP and the configuration template, if <wan> is equal to <None> the user is
-        prompted to enter manually. If <wan> is a String with valid content it is replaced in the correct place within
-        the template."""
+        """Inserts the WAN IPs calculated in the default configuration template according to each field."""
 
         self.wan_inter_wan = wan
         self.wan_inter_template = template
@@ -1016,9 +1010,7 @@ class Product:
 
     def lan_inter(self, lan, template):
 
-        """It receives the internet LAN IP and the configuration template, if <lan> is equal to <None> the user is
-        prompted to manually enter. If <lan> is a String with valid content it is replaced in the correct place within
-        the template"""
+        """Inserts the LAN IPs calculated in the default configuration template according to each field."""
 
         self.lan_inter_lan = lan
         self.lan_inter_template = template
@@ -1102,9 +1094,7 @@ class Product:
 
     def speed_inter(self, speed, template):
 
-        """It receives the internet speed and the configuration template, if <speed> is equal to <None> the user is
-        prompted to enter manually. If <speed> is a String with valid content it is replaced in the correct place within
-         the template."""
+        """Inserts the internert speed into 'bps' in the default configuration template."""
 
         self.speed_speed_inter = speed
         self.speed_template_inter = template
@@ -1135,9 +1125,7 @@ class Product:
 
     def circuit_voip(self, circuit, template):
 
-        """It receives the voip circuit and the configuration template, if <circuit> is equal to <None> the user is
-        prompted to manually enter. If the <circuit> is a String with valid content it is replaced in the correct place
-        within the template."""
+        """Enter the circuit number in the default configuration template."""
 
         self.circ_circuit_voip = circuit
         self.circ_template_voip = template
@@ -1163,9 +1151,7 @@ class Product:
 
     def vlan_voip(self, vlan, template):
 
-        """You receive the vlan de voip and the configuration template, if <vlan> is equal to <None> the user is
-        prompted to enter manually. If <vlan> is a String with valid content it is replaced in the correct place within
-        the template."""
+        """Inserts the Voip VLAN into the default configuration template.."""
 
         self.vl_vlan_voip = vlan
         self.vl_template_voip = template
@@ -1198,9 +1184,7 @@ class Product:
 
     def wan_voip(self, wan, template):
 
-        """You receive the voip WAN and the configuration template, if <wan> is equal to <None> the user is prompted to
-        manually enter. If <wan> is a String with valid content it is replaced in the correct place within the template.
-        """
+        """Inserts the WAN IPs calculated in the default configuration template according to each field."""
 
         self.wan_voip_wan = wan
         self.wan_voip_template = template
@@ -1255,9 +1239,7 @@ class Product:
 
     def lan_voip(self, lan, template):
 
-        """It receives the voip LAN and the configuration template, if <lan> is equal to <None> the user is prompted to
-        manually enter. If <lan> is a String with valid content it is replaced in the correct place within the template.
-        """
+        """Inserts the LAN IPs calculated in the default configuration template according to each field."""
 
         self.lan_voip_lan = lan
         self.lan_voip_template = template
@@ -1313,9 +1295,7 @@ class Product:
 
     def sbc_voip(self, sbc, template):
 
-        """It receives the IP of the SBC voip server and the configuration template, if <sbc> is equal to <None> the
-        user is prompted to enter manually. If <sbc> is a String with valid content it is replaced in the correct place
-        within the template."""
+        """Inserts the validated SBC IPs into the default configuration template according to each field."""
 
         self.sbc_voip_sbc = sbc
         self.sbc_voip_template = template
@@ -1349,9 +1329,7 @@ class Product:
 
     def channel_voip(self, channel, template):
 
-        """You receive the amount of voip channels and the configuration template, if <channel> is equal to <None> the
-        user is prompted to manually enter. If <channel> is a String with valid content it is replaced in the correct
-        place within the template."""
+        """Inserts the number of channels in the default template."""
 
         self.ch_channel_voip = channel
         self.ch_template_voip = template
@@ -1385,8 +1363,7 @@ class Product:
 
     def man_add_range(self, template):
 
-        """This method is triggered when the router is configured for 'RAMAL' ticketing and method search
-        'auto_add_range' did not find the required data on the txt ticket"""
+        """Inserts the manually entered extensions into the default template as many times as necessary."""
 
         self.man_add_ran_template = template
         while self.man_add_ran_new_exten != -1:
@@ -1418,8 +1395,10 @@ class Product:
                 continue
         return self.man_add_ran_template
 
-    # ADICIONA GAMA DE RAMAIS AUTOMATICO
     def auto_add_range(self, template, ticket_voztotal):
+
+        """Inserts extensions found automatically in the txt file"""
+
         self.auto_add_ran_template = template
         self.auto_add_ran_ticket_voztotal = ticket_voztotal
         while self.auto_add_ran_new_exten != -1:
@@ -1439,8 +1418,10 @@ class Product:
                 self.auto_add_ran_new_exten = -1
         return self.auto_add_ran_template
 
-    # ADICIONA RAMAL CHAVE MANUALMENTE
     def man_add_key(self, template):
+
+        """Inserts the key extension provided by the user in the default template."""
+
         self.man_add_key_template = template
         os.system('cls')
         self.man_add_key_exten = input(
@@ -1451,8 +1432,10 @@ class Product:
                                                                 self.man_add_key_exten, self.man_add_key_template)
         return self.man_add_key_template
 
-    # ADICIONA RAMAL CHAVE AUTOMATICO
     def auto_add_key(self, template, ticket_voztotal):
+
+        """Inserts extensions found automatically in the txt file"""
+
         self.auto_add_key_template = template
         self.auto_add_key_ticket_voztotal = ticket_voztotal
         self.auto_add_key_exten = tools.search_in_ticket(self.facilities.os_voip_auto_add_key_tag,
@@ -1470,8 +1453,9 @@ class Product:
             self.auto_add_key_template = self.man_add_key(self.auto_add_key_template)
         return self.auto_add_key_template
 
-    # BILHETAGEM VOIP
     def billing_voip(self, billing, template, ticket_voztotal):
+
+        """Defines which type of signaling will be configured and calls the functions of entering extensions."""
 
         self.bi_billing_voip = billing
         self.bi_template_voip = template
@@ -1538,8 +1522,11 @@ class Product:
                     self.bi_billing_voip = None
                     continue
 
-    # INTERNET LINK + VOZ TOTAL R2
     def audio_internet_voz_r2(self):
+
+        """Search the network or local folder for the default configuration template for the 'Internet Link + Voz Total'
+         service."""
+
         try:
             # self.ivr2_archive = open(main.path + 'Audiocodes\\Audiocodes_Internet_Voz_R2.txt')
             # Busca o padrão de configuração no servidor
@@ -1657,8 +1644,10 @@ class Product:
 
         return self.audio_ivr2_template
 
-    # GERA SCRIPT
     def generate_script(self):
+
+        """Identifies the type of service and calls the corresponding function to generate the script."""
+
         if self.prod_equipment == 'Audiocodes':
             if self.prod_product == 'Internet Link + Voz Total R2':
                 self.gener_template = self.audio_internet_voz_r2()
@@ -1667,7 +1656,10 @@ class Product:
 
 class Support:
 
+    """This Class is responsible for check hardware and software."""
+
     def __init__(self, product, equipment):
+
         self.supp_product = product
         self.supp_equipment = equipment
         self.supp_audi_products = 'Internet Link', 'Voz Total R2', 'Voz Total ISDN', 'Voz Total PABX IP', \
@@ -1676,10 +1668,16 @@ class Support:
         self.supp_veri_check = False
 
     def audiocodes(self):
+
+        """Identifies whether the equipment informed supports the product."""
+
         if self.supp_product in self.supp_audi_products:
             return True
 
     def verify(self):
+
+        """Identifies whether it is an equipment supported by the system."""
+
         if self.supp_equipment == 'Audiocodes':
             self.supp_veri_check = self.audiocodes()
             if self.supp_veri_check:
@@ -1689,6 +1687,8 @@ class Support:
 
 
 class RunAudiocodes:
+
+    """This class manages and sends commands to the 'AudioCodes' router.'"""
 
     def __init__(self):
 
@@ -1766,8 +1766,8 @@ class RunAudiocodes:
 
     def audio_read_serial(self, console):
 
-        """Esse método faz a leitura da quantidade de bytes que estão pendentes na serial e retorna para uma string
-        onde são armazenados como da interação do roteador como software"""
+        """This method reads the messages sent by the router in bytes, is converted and stored to
+        check and log"""
 
         self.audio_read_serial_console = console
 
@@ -1787,8 +1787,8 @@ class RunAudiocodes:
 
     def audio_send_command(self, console, cmd=''):
 
-        """Esse método envia uma string codificada em bytes para a serial e retorna o log que foi gerado pelo método
-                'read_serial'"""
+        """This method sends a string-encoded string to the serial and returns the log that was generated by the method
+           'read_serial'.'"""
 
         self.audio_send_comm_console = console
         self.audio_send_comm_cmd = cmd
@@ -1799,8 +1799,8 @@ class RunAudiocodes:
 
     def audio_check_logged_in(self, console):
 
-        """Esse método envia quebras de linhas como comando para serial e faz a leitura do log que retorna verdadeiro
-        caso o roteador esteja em modo de configuração 'enable'"""
+        """This method sends line breaks as a command to serial and reads the log that returns true
+        if the router is in 'enable'"""
 
         self.audio_check_log_console = console
 
@@ -1814,8 +1814,8 @@ class RunAudiocodes:
 
     def audio_logout(self, console):
 
-        """Esse método utiliza 'check_logged_in' para verificar o status de acesso do roteador e enviar o comando 'exit'
-        enquanto o roteador não estiver solicitando Usuário e Senha"""
+        """This method uses 'check_logged_in' to check the access status of the router and sends the 'exit'
+        while the router is not prompting for User and Password"""
 
         self.audio_logout_console = console
 
@@ -1828,8 +1828,8 @@ class RunAudiocodes:
 
     def audio_login(self, console):
 
-        """Esse método utiliza 'check_logged_in' para verificar o status do roteador e envia o usuário e
-        senha realizando acesso ao modo de configuração"""
+        """This method uses 'check_logged_in' to check the status of the router and sends the user and
+        password by accessing configuration mode"""
 
         self.audio_login_console = console
 
@@ -1879,6 +1879,9 @@ class RunAudiocodes:
         pass
 
     def audio_conect_com(self):
+
+        """Performs the configuration of the COM serial communication port."""
+
         while True:
             os.system('cls')
             self.audio_conect_config_com = input(
@@ -1904,9 +1907,8 @@ class RunAudiocodes:
 
     def audio_check_router(self, console):
 
-        """Envia quebra de linha e faz a leitura da quantidade de bytes que foram retornados da serial,  no caso da
-               serial retornar 0 o equipamento pode estar ausente
-               mais de 16 bytes ele está iniciando ou com bug de firmware """
+        """It sends line breaks and reads the number of bytes that were returned from the serial, in the case of
+           Serial return '0' The machine may be missing, more than 16 bytes it is starting or with firmware bug"""
 
         self.audio_check_rou_console = console
         os.system('cls')
@@ -1946,7 +1948,7 @@ class RunAudiocodes:
 
     def audio_check_version(self, console):
 
-        """Esse método realiza a verificação da versão de firmware do roteador"""
+        """This method performs the verification of the firmware version of the router."""
 
         self.audio_check_version_console = console
 
@@ -1972,6 +1974,8 @@ class RunAudiocodes:
             return False
 
     def audio_check_server(self, console):
+
+        """"""
 
         self.audio_check_server_console = console
 
@@ -2231,6 +2235,7 @@ class RunAudiocodes:
 class Main(object):
 
     def __init__(self):
+
         self.path_server = '\\\\10.107.16.153\\'  # IP do servidor de arquivos
         self.local_host = '192.168.0.3'  # IP da máquina local
         self.banner = '\n'.join('{:^80}'.format(s) for s in
@@ -2291,7 +2296,7 @@ class Main(object):
 
     def search_the_file(self, order_id):
 
-        """Recebe uma String com o número da ordem de serviço a ser pesquisada no servidor"""
+        """Search the server for the configuration ticket number entered by the user."""
 
         self.sear_order_id = order_id
         try:

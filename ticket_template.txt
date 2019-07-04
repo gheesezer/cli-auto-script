@@ -1,0 +1,47 @@
+CADA ORDEM SE SERVIÇO GERA UM BILHETE AUTOMATICAMENTE:
+_____________________________________________________________________________
+
+##INFORMAÇÕES QUE VEM POR PADRÃO NO BILHETE DE INTERNET LINK:
+
+	ID DA ORDEM = 000001
+	NOME DO CLIENTE = CLIENTE X
+	PRODUTO = Internet Link
+	ID DO SERVIÇO = 0000000001
+	Velocidade = 30 Mbps
+	Endereco IP WAN : 200.125.78.28/30
+	Endereco IP LAN : 200.125.78.24/29
+	VLAN: 10
+
+_____________________________________________________________________________
+
+##INFORMAÇÕES QUE VEM POR PADRÃO NO BILHETE DE VOZ TOTAL R2 ou ISDN:
+
+	ID DA ORDEM = 000002
+	NOME DO CLIENTE = CLIENTE X
+	PRODUTO = Voz Total
+	ID DO SERVIÇO = 0000000002
+	NUMERO CHAVE = 01931153480
+	SINALIZAÇÃO PABX CLIENTE = R2
+	Endereco IP WAN: 10.55.235.180/30    
+	VLAN: 11
+	Bilhetagem: Ramal 
+	Chamadas Simultaneas: 30
+	IP SBC: 177.77.777.7
+	GAMA 0: 1131903010	
+	GAMA 1: 1931175400~1931175499	              
+	GAMA 2: 1935144454                    
+	GAMA 3: 1931166600~1931166699
+	
+_____________________________________________________________________________
+
+##INFORMAÇÕES QUE VEM POR PADRÃO NO BILHETE DE PONTO DE ACESSO:
+    
+	ID DA ORDEM = 000003
+	SW = clm-sw-cas-00001-clientex 
+	Modelo = CISCO - 2CS-A 
+	IP: 177.29.173.22/24 
+	GATEWAY: 177.29.173.254
+	VLAN GERENCIA: 100 
+	REP: 5 
+	ANEL: Campinas01
+	ROTEADOR = Audiocodes
