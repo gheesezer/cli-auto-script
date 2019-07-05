@@ -1,5 +1,5 @@
 #
-# Autor: Guilherme César Da Silva <dasilvaguilhermecesar@gmail.com>
+# Author: Guilherme César Da Silva <dasilvaguilhermecesar@gmail.com>
 #
 # AutoScript for Windows OS
 #
@@ -535,10 +535,10 @@ class OS:
             if self.size_id <= 6:
                 return self.id_os
             else:
-                print(tools.centralize_message('\nOrdem de Serviço tem Apenas 6 Números!'))
+                print(tools.centralize_message('\n\nOrdem de Serviço tem Apenas 6 Números!'))
                 time.sleep(2)
         else:
-            print(tools.centralize_message('\nDigite Apenas Números!'))
+            print(tools.centralize_message('\n\nDigite Apenas Números!'))
             time.sleep(2)
             return False  #
 
@@ -578,10 +578,10 @@ class OS:
             if self.size_circ <= 10:
                 return self.circuit
             else:
-                print(tools.centralize_message('\nDigite no máximo até 10 números!'))
+                print(tools.centralize_message('\n\nDigite no máximo até 10 números!'))
                 time.sleep(2)
         else:
-            print(tools.centralize_message('\nDigite Apenas Números!'))
+            print(tools.centralize_message('\n\nDigite Apenas Números!'))
             time.sleep(2)
             return None
 
@@ -595,11 +595,11 @@ class OS:
             if 0 < self.vlan <= 4000:
                 return str(self.vlan)
             else:
-                print(tools.centralize_message('\nDigite Vlan entre 1 e 4000!'))
+                print(tools.centralize_message('\n\nDigite Vlan entre 1 e 4000!'))
                 time.sleep(2)
                 return None
         else:
-            print(tools.centralize_message('\nDigite Apenas Números!'))
+            print(tools.centralize_message('\n\nDigite Apenas Números!'))
             time.sleep(2)
             return None
 
@@ -630,7 +630,7 @@ class OS:
             else:
                 return None
         else:
-            print(tools.centralize_message('\nDigite Apenas Números!'))
+            print(tools.centralize_message('\n\nDigite Apenas Números!'))
             time.sleep(2)
             return None
 
@@ -661,11 +661,11 @@ class OS:
             if 0 < self.channel <= 30:
                 return str(self.channel)
             else:
-                print(tools.centralize_message('\nDigite Canais entre 1 e 30!'))
+                print(tools.centralize_message('\n\nDigite Canais entre 1 e 30!'))
                 time.sleep(2)
                 return None
         else:
-            print(tools.centralize_message('\nDigite Apenas Números'))
+            print(tools.centralize_message('\n\nDigite Apenas Números'))
             time.sleep(2)
             return None
 
@@ -1203,12 +1203,12 @@ class Product:
                     self.wan_voip_fband, self.wan_voip_lband, self.wan_voip_ipGateway, self.wan_voip_broadcast, \
                     self.wan_voip_mask = (self.facilities.validate_wan(self.wan_voip_wan))
                 except ValueError:
-                    print(tools.centralize_message('\n Entrada Invalida!'))
+                    print(tools.centralize_message('\n\nEntrada Invalida!'))
                     time.sleep(2)
                     self.wan_voip_wan = None
                     continue
                 except TypeError:
-                    print(tools.centralize_message('\n Faixa de Wan Invalida!'))
+                    print(tools.centralize_message('\n\nFaixa de Wan Invalida!'))
                     time.sleep(2)
                     self.wan_voip_wan = None
                     continue
@@ -1259,12 +1259,12 @@ class Product:
                     self.lan_voip_fband, self.lan_voip_lband, self.lan_voip_ipGateway, self.lan_voip_broadcast, \
                     self.lan_voip_mask = (self.facilities.validate_lan(self.lan_voip_lan))
                 except ValueError:
-                    print(tools.centralize_message('\n Entrada Invalida!'))
+                    print(tools.centralize_message('\n\nEntrada Invalida!'))
                     time.sleep(2)
                     self.lan_voip_lan = None
                     continue
                 except TypeError:
-                    print(tools.centralize_message('\n Faixa de Lan Invalida!'))
+                    print(tools.centralize_message('\n\nFaixa de Lan Invalida!'))
                     time.sleep(2)
                     self.lan_voip_lan = None
                     continue
@@ -1386,11 +1386,11 @@ class Product:
                         self.man_add_ran_new_exten = -1
                         break
                     else:
-                        print(tools.centralize_message('\nEntrada invalida!'))
+                        print(tools.centralize_message('\n\nEntrada invalida!'))
                         time.sleep(2)
                         continue
             else:
-                print(tools.centralize_message('\nRamal Invalido!'))
+                print(tools.centralize_message('\n\nRamal Invalido!'))
                 time.sleep(2)
                 continue
         return self.man_add_ran_template
@@ -1498,7 +1498,7 @@ class Product:
                         self.bi_template_voip = self.man_add_key(self.bi_template_voip)
                         return self.bi_template_voip
                 else:
-                    print(tools.centralize_message('\nEntrada Invalida!'))
+                    print(tools.centralize_message('\n\nEntrada Invalida!'))
                     time.sleep(2)
             else:
                 if self.bi_billing_voip == 'Rml':
@@ -1536,7 +1536,7 @@ class Product:
 
             self.audio_ivr2_template = list(self.audio_ivr2_archive.readlines())
         except TypeError:
-            print(tools.centralize_message('\nTemplate Não Localizado!'))
+            print(tools.centralize_message('\n\nTemplate Não Localizado!'))
             time.sleep(2)
 
         if self.prod_tickets is None:
@@ -1892,7 +1892,7 @@ class RunAudiocodes:
                                                               baudrate=115200, parity="N", stopbits=1, bytesize=8,
                                                               timeout=8)
                 except BaseException:
-                    print(tools.centralize_message('\nPorta COM Indisponível!'))
+                    print(tools.centralize_message('\n\nPorta COM Indisponível!'))
                     time.sleep(2)
                     continue
                 if self.audio_conect_console.isOpen():
@@ -1901,7 +1901,7 @@ class RunAudiocodes:
                     self.audio_send_command(self.audio_conect_console, cmd='\n')
                     return self.audio_conect_console
                 else:
-                    print(tools.centralize_message('\nPorta COM Indisponivel: ' + self.audio_conect_config_com))
+                    print(tools.centralize_message('\n\nPorta COM Indisponivel: ' + self.audio_conect_config_com))
                     time.sleep(2)
                     continue
 
@@ -1934,7 +1934,7 @@ class RunAudiocodes:
                     continue
                 else:
                     os.system('cls')
-                    print(tools.centralize_message(main.banner + '\nEquipamento sem acesso, verifique!'))
+                    print(tools.centralize_message(main.banner + '\n\nEquipamento sem acesso, verifique!'))
                     time.sleep(2)
                     self.audio_read_serial(self.audio_conect_console)
                     return False
@@ -1975,7 +1975,7 @@ class RunAudiocodes:
 
     def audio_check_server(self, console):
 
-        """"""
+        """Performs network testing to ensure access to the remote server."""
 
         self.audio_check_server_console = console
 
@@ -2001,6 +2001,8 @@ class RunAudiocodes:
 
     def audio_update_brtons(self, console):
 
+        """Sends commands to update the 'brtons' file."""
+
         self.audio_update_brtons_console = console
 
         os.system('cls')
@@ -2025,6 +2027,8 @@ class RunAudiocodes:
                     continue
 
     def audio_update_castable(self, console):
+
+        """Sends commands to update the 'castable' file."""
 
         self.audio_update_castable_console = console
 
@@ -2053,6 +2057,8 @@ class RunAudiocodes:
 
     def audio_log_copy(self):
 
+        """Message to user during upgrade."""
+
         self.audio_log_copy_lista = ['|', '/', '—', '\\', '|', '']
         self.audio_log_copy_string = '\nAtualizando:  ' + self.audio_update_cmp_firmware
         for self.audio_log_copy_up in range(0, 7):
@@ -2068,6 +2074,8 @@ class RunAudiocodes:
                 time.sleep(.2)
 
     def audio_log_save(self):
+
+        """Message to user during upgrade."""
 
         self.audio_log_save_lista = ['|', '/', '—', '\\', '|', '']
         self.audio_log_save_string = '\nAtualizando:  ' + self.audio_update_cmp_firmware
@@ -2085,6 +2093,8 @@ class RunAudiocodes:
 
     def audio_log_restart(self):
 
+        """Message to user during upgrade."""
+
         self.audio_log_restart_lista = ['|', '/', '—', '\\', '|', '']
         self.audio_log_restart_string = '\nAtualizando:  ' + self.audio_update_cmp_firmware
         for self.audio_log_restart_up in range(0, 7):
@@ -2100,6 +2110,8 @@ class RunAudiocodes:
                 time.sleep(.2)
 
     def audio_update_cmp(self, console):
+
+        """Sends commands to update the 'cmp' file."""
 
         self.audio_update_cmp_console = console
 
@@ -2169,7 +2181,7 @@ class RunAudiocodes:
 
     def audio_update_full(self, console):
 
-        """Esse método é realiza as atualizações do roteador Audiocodes"""
+        """This method performs the update call in the order of the files."""
 
         self.audio_update_console = console
 
@@ -2182,6 +2194,8 @@ class RunAudiocodes:
             self.audio_update_cmp(self.audio_update_console)
 
     def audio_configure(self, console, template):
+
+        """Send commands contained in the template to the router."""
 
         self.audio_configure_console = console
         self.audio_configure_template = template
@@ -2214,6 +2228,8 @@ class RunAudiocodes:
 
     def audio_serial(self, template):
 
+        """Performs the console connection, checks the integrity of the router, and initializes the update if necessary."""
+
         self.audio_serial_template = template
         self.audio_serial_console = self.audio_conect_com()
         self.audio_serial_check_router = self.audio_check_router(self.audio_serial_console)
@@ -2233,6 +2249,8 @@ class RunAudiocodes:
 
 
 class Main(object):
+
+    """"""
 
     def __init__(self):
 
@@ -2319,11 +2337,11 @@ class Main(object):
             time.sleep(2)
             return None
         except FileNotFoundError:
-            print(tools.centralize_message('\nServidor não Localizado!'))
+            print(tools.centralize_message('\n\nServidor não Localizado!'))
             time.sleep(2)
             return None
         except OSError:
-            print(tools.centralize_message('\nDiretório não Localizado!'))
+            print(tools.centralize_message('\n\nDiretório não Localizado!'))
             time.sleep(2)
             return None
 
@@ -2390,7 +2408,7 @@ class Main(object):
                 if self.dis_fin_product == '1':
                     return 'Internet Link + Voz Total R2'
                 else:
-                    print(tools.centralize_message('\nOpção Invalida!'))
+                    print(tools.centralize_message('\n\nOpção Invalida!'))
                     time.sleep(2)
                     continue
             else:
@@ -2424,7 +2442,7 @@ class Main(object):
                 if self.dis_rout_router == '1':
                     return 'Audiocodes'
                 else:
-                    print(tools.centralize_message('\nOpção Invalida!'))
+                    print(tools.centralize_message('\n\nOpção Invalida!'))
                     time.sleep(2)
                     continue
             else:
@@ -2454,7 +2472,7 @@ class Main(object):
                 continue
             elif self.menu_order_id == '':
                 if not self.menu_tickets_order_id:
-                    print(tools.centralize_message('\nMínimo uma OS para Execução!'))
+                    print(tools.centralize_message('\n\nMínimo uma OS para Execução!'))
                     time.sleep(2)
                     continue
                 else:
@@ -2519,7 +2537,7 @@ if __name__ == "__main__":
 
         tickets, product, equipment = main.menu()
 
-        if tickets == 'i':  # Caso o retorno de 'menu()' seja 'i' é reinicializado o sistema
+        if tickets == 'i':
             continue
 
         if tickets:
