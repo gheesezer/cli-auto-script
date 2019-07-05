@@ -1309,7 +1309,7 @@ class Product:
                 os.system('cls')
                 self.sbc_voip_sbc = input(
                     tools.centralize_message(
-                        main.banner + '\n\n\nDigite o IP SBC de Voz Total:\tEx. 172.26.154.70')
+                        main.banner + '\n\n\nDigite o IP SBC de Voz Total:\tEx. 177.77.77.7')
                     + '\n\n\n SBC de Voz Total > ')
                 self.sbc_voip_sbc = (self.facilities.validate_sbc(self.sbc_voip_sbc))
                 for self.sbc_voip_search in range(self.sbc_occurrence_voip):
@@ -1531,11 +1531,9 @@ class Product:
             # self.ivr2_archive = open(main.path + 'Audiocodes\\Audiocodes_Internet_Voz_R2.txt')
             # Search for the default configuration on the server
 
-            # self.audio_ivr2_archive = open('C:\\Users\\Public\\Documents\\Audiocodes_Internet_Voz_R2.txt')
+            self.audio_ivr2_archive = open('C:\\Users\\Public\\Documents\\configuration_template - '
+                                           'Audiocodes_M500_Internet+Voz.txt')
             # Search for the default local configuration template
-
-            self.audio_ivr2_archive = open('configuration_template - Audiocodes_M500_Internet+Voz.txt')
-            # Search the configuration pattern in the same application folder
 
             self.audio_ivr2_template = list(self.audio_ivr2_archive.readlines())
         except TypeError:
