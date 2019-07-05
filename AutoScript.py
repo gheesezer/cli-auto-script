@@ -1529,10 +1529,13 @@ class Product:
 
         try:
             # self.ivr2_archive = open(main.path + 'Audiocodes\\Audiocodes_Internet_Voz_R2.txt')
-            # Busca o padrão de configuração no servidor
+            # Search for the default configuration on the server
 
-            self.audio_ivr2_archive = open('C:\\Users\\Public\\Documents\\Audiocodes_Internet_Voz_R2.txt')
-            # Busca o template padrão de configuração local
+            # self.audio_ivr2_archive = open('C:\\Users\\Public\\Documents\\Audiocodes_Internet_Voz_R2.txt')
+            # Search for the default local configuration template
+
+            self.audio_ivr2_archive = open('configuration_template - Audiocodes_M500_Internet+Voz.txt')
+            # Search the configuration pattern in the same application folder
 
             self.audio_ivr2_template = list(self.audio_ivr2_archive.readlines())
         except TypeError:
@@ -2325,9 +2328,11 @@ class Main(object):
             for self.sear_file in self.sear_dir:
                 if self.sear_order_id in self.sear_file:
                     # self.sear_archive = open(self.path_server + 'Bilhete_OSM\\' + self.sear_file, 'r')
-                    # Busca o arquivo no servidor
+                    # Search the file on the server
 
                     self.sear_archive = open('C:\\Users\\Public\\Documents\\' + self.sear_file, 'r')
+                    # Search the file on the local machine
+
                     self.sear_data = list(self.sear_archive.readlines())
                     self.sear_temp = {self.sear_order_id: self.sear_data}
                     return self.sear_temp
@@ -2490,31 +2495,30 @@ class Main(object):
                 if self.menu_check_id:
                     try:
                         self.menu_temp = self.search_the_file(self.menu_order_id)
-                        # Chama a função 'search_the_file()' e passa o número da OS como parâmetro
-                        # Caso o retorno seja 'None' gera um 'TypeError'
+                        # Call the function 'search_the_file ()' and pass the OS number as parameter
+                        # If the return is 'None' it generates a 'TypeError'
 
                         self.menu_tickets_order_id.update(self.menu_temp)
-                        # Armazena o retorno da 'search_the_file()' e um dicionário com números de OS
+                        # Stores the return from 'search_the_file ()' and a dictionary with OS numbers
 
                         self.menu_temp, self.menu_product = self.discover_the_product(self.menu_temp)
-                        # descobri o nome do produto
-                        # Caso o produto seja repetido gera um 'AttributeError'
-                        # Caso o retorno seja 'None' gera um 'TypeError'
+                        # find the product name
+                        # If the product is repeated it generates an 'AttributeError'
+                        # If the return is 'None' it generates a 'TypeError'
 
                         self.menu_tickets_product.update(self.menu_temp)
-                        # Armazena o retorno da 'discover_the_product()' e um outro dicionário com nomes de produtos
+                        # Stores return from discover_the_product () and another dictionary with product names
 
                         self.menu_new_banner += self.menu_order_id + ': ' + self.menu_product + '   '.center(10, ' ')
-                        # cria um string com o nome do produto e o númeor da OS centralizando com 10 pixels de espaço
-                        # Caso o retorno de 'discover_the_product()' seja 'None' gera um 'TypeError'
+                        # creates a string with the product name and OS number centering with 10 pixels of space
+                        # If the return from 'discover_the_product ()' is 'None' it generates a 'TypeError'
 
                         self.menu_run -= 1
-                        # decrementa 1 da execução de entradas
 
                     except TypeError:
                         continue
                     except AttributeError:
-                        print(tools.centralize_message('\nCombinação de produtos Invalida!'))
+                        print(tools.centralize_message('\n\nCombinação de produtos Invalida!'))
                         time.sleep(2)
                         continue
         if self.menu_order_id:
@@ -2547,7 +2551,7 @@ if __name__ == "__main__":
             generate_script = Product(equipment, product, None)
             template = generate_script.generate_script()
 
-        with open('Audiocodes.txt', 'w') as archive:
+        with open('Audiocodes_M500_Script.txt', 'w') as archive:
             archive.writelines(template)
 
         os.system('cls')
