@@ -2251,7 +2251,7 @@ class RunAudiocodes:
 
 class Main(object):
 
-    """"""
+    """This class is responsible for discovering the main information needed to generate the script"""
 
     def __init__(self):
 
@@ -2350,7 +2350,7 @@ class Main(object):
 
     def discover_signaling(self, ticket):
 
-        """Recebe um Dicionário com o número da OS e o conteúdo do arquivo de Voz Total"""
+        """Search for the signage informed on the order ticket."""
 
         self.dis_sign_ticket = ticket
         while True:
@@ -2362,7 +2362,7 @@ class Main(object):
                 if self.dis_sign_signaling == '1':
                     return 'Voz Total R2'
                 else:
-                    print(tools.centralize_message('\nOpção Invalida!'))
+                    print(tools.centralize_message('\n\nOpção Invalida!'))
                     time.sleep(2)
                 continue
             else:
@@ -2377,7 +2377,7 @@ class Main(object):
 
     def discover_the_product(self, tickets):
 
-        """Recebe um Dicionário com os números das OSs e os conteúdos dos arquivos"""
+        """Search which product is informed in the order ticket"""
 
         self.dis_prod_tickets = tickets
         for self.dis_prod_values in self.dis_prod_tickets.values():
@@ -2398,7 +2398,7 @@ class Main(object):
 
     def discover_final_product(self, tickets):
 
-        """Recebe um Dicionário com os números das OSs e os conteúdos dos arquivos"""
+        """Search which combination of products will be configured informed on the order ticket"""
 
         self.dis_fin_tickets = tickets
         while True:
@@ -2431,7 +2431,7 @@ class Main(object):
 
     def discover_router(self, tickets):
 
-        """Recebe um Dicionário com os números das OSs e os conteúdos dos arquivos"""
+        """Search which model dp router is informed in order ticket"""
 
         self.dis_rout_tickets = tickets
 
@@ -2463,8 +2463,7 @@ class Main(object):
 
     def menu(self):
 
-        """Inicio da interação com usuário, solicita por três vezes o número da OS,
-        porem pode ser interrompido por um 'Enter' após a primeira entrada"""
+        """Receives user input with work order numbers"""
 
         while self.menu_run > 0:
             os.system('cls')
