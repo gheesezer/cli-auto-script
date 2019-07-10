@@ -1795,7 +1795,7 @@ class RunAudiocodes:
         self.audio_send_comm_cmd = cmd
 
         self.audio_send_comm_console.write(self.audio_send_comm_cmd.encode() + str.encode('\n'))
-        time.sleep(1)
+        time.sleep(.5)
         return self.audio_read_serial(self.audio_send_comm_console)
 
     def audio_check_logged_in(self, console):
@@ -2212,9 +2212,9 @@ class RunAudiocodes:
             self.audio_configure_dot *= self.audio_configure_up
             for self.audio_configure_front in self.audio_configure_lista:
                 os.system("cls")
-                print(tools.centralize_message(
-                    main.banner + '\n\nConfigurando' + self.audio_configure_dot + self.audio_configure_front))
-                time.sleep(.05)
+                print(main.banner + '\n\n                              '
+                                    'Configurando' + self.audio_configure_dot + self.audio_configure_front)
+                time.sleep(.02)
             self.audio_configure_log = str(self.audio_send_command(self.audio_configure_console,
                                                                    cmd=self.audio_configure_template[
                                                                        self.audio_configure_cmd]))
