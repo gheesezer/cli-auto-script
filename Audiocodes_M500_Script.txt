@@ -1,0 +1,409 @@
+configure voip
+no voip-network ip-group 3
+no voip-network ip-group 2
+no voip-network ip-group 1
+coders-and-profiles coders-group-0 0
+name "g729"
+p-time 20
+rate 0
+silence-suppression enable
+activate
+exit
+coders-and-profiles coders-group-0 1
+name "g711Alaw64k"
+p-time 20
+rate 0
+activate
+exit
+gw routing tel2ip-routing 0
+ip-profile-id 0
+dst-ip-group-id 1
+activate
+exit
+gw routing ip2tel-routing 0
+dst-phone-prefix "*"
+trunk-group-id 1
+activate
+exit
+#INICIO DOS RAMAIS
+gw manipulations src-number-map-tel2ip 0
+num-of-digits-to-leave 0
+prefix-to-add "1933569999"
+activate
+exit
+#FIM DOS RAMAIS
+gw manipulations dst-number-map-ip2tel 0
+num-of-digits-to-leave 4
+activate
+exit
+interface e1-t1 2/1
+play-rbt-to-trk play-local-until-remote-media-arrives
+clock-master clock-master-on
+framing e1-framing-mff-crc4-ext
+line-code hdb3
+protocol 7
+activate
+exit
+gw hunt-or-trunk-group trunk-group 0
+trunk-group-id 1
+first-trunk-id 1
+first-b-channel 1
+last-b-channel 30
+last-trunk-id 1
+module 2
+activate
+exit
+gw hunt-or-trunk-group trunk-group-setting 0
+trunk-group-id 1
+channel-select-mode channel-cyclic-ascending
+activate
+exit
+gw dtmf-and-suppl dtmf-and-dialing
+dtmf-options 0
+type rfc-2833
+activate
+exit
+time-btwn-dial-digs 2
+activate
+exit
+gw dtmf-and-suppl supplementary-services
+set call-waiting off
+set call-forward off
+set hold off
+set enable-transfer off
+activate
+exit
+gw digitalgw digital-gw-parameters
+set disc-on-bsy-tone-c off
+activate
+exit
+interface network-if 0
+ip-address 192.168.0.2
+prefix-length 24
+gateway 192.168.0.1
+name "Voice"
+primary-dns 192.168.0.1
+underlying-dev "vlan 1"
+activate
+exit
+media udp-port-configuration
+base-udp-port 12000
+udp-port-spacing 10
+activate
+exit
+services least-cost-routing routing-rule-groups 0
+lcr-default-cost highest-cost
+activate
+exit
+sip-definition general-settings
+early-media off
+fax-sig-method t.38-relay
+activate
+exit
+sip-definition advanced-settings
+set ldap-primary-key "telephoneNumber"
+ip-security secure-incoming-calls
+disc-broken-conn disable
+activate
+exit
+tdm
+pcm-law-select alaw
+activate
+exit
+voip-network sip-interface 0
+network-interface "WAN"
+tcp-port 0
+tls-port 0
+activate
+exit
+voip-network realm 0
+name "WAN_MR"
+ipv4if "WAN"
+port-range-start 12000
+session-leg 30
+port-range-end 12290
+is-default true
+activate
+exit
+voip-network srd 0
+name "WAN_SRD"
+media-realm-name "WAN_MR"
+activate
+exit
+voip-network proxy-set 0
+proxy-name ""
+activate
+exit
+voip-network proxy-set 1
+proxy-name ""
+activate
+exit
+voip-network proxy-ip 0
+proxy-address "177.77.77.7"
+proxy-set-id 1
+activate
+exit
+voip-network ip-group 1
+description "SIP Trunk"
+proxy-set-id 1
+sip-group-name "177.77.77.7"
+media-realm-name "WAN_MR"
+activate
+exit
+exit
+configure system
+cli-terminal
+set privilege-password test
+wan-ssh-allow on
+wan-telnet-allow on
+ssh on
+activate
+exit
+logging
+dbg-rec
+dbg-rec-dest-ip 192.168.0.3
+dbg-rec-status Stop
+activate
+exit
+logging-filters 0
+filter-type ip-trace
+activate
+exit
+logging-filters 1
+filter-type trunk-id
+value "1"
+capture-type pstn-trace
+activate
+exit
+logging-filters 2
+capture-type signaling-media-pcm
+activate
+exit
+syslog off
+debug-level detailed
+syslog-ip 192.168.0.20
+activate
+exit
+ntp
+set secondary-server "10.88.100.10"
+set primary-server "10.88.100.11"
+set utc-offset -10800
+set update-interval 43200
+activate
+exit
+snmp
+wan-snmp-allow on
+ro-community-string 0 test0
+ro-community-string 1
+ro-community-string 2
+ro-community-string 3
+ro-community-string 4
+rw-community-string 0 test1
+rw-community-string 1
+rw-community-string 2
+rw-community-string 3
+rw-community-string 4
+activate
+exit
+web
+wan-http-allow on
+wan-https-allow on
+set https-cipher-string "RC4:EXP"
+activate
+exit
+welcome-msg 1
+text "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+activate
+exit
+welcome-msg 2
+text " "
+activate
+exit
+welcome-msg 3
+text "     A T E N C A O"
+activate
+exit
+welcome-msg 4
+text " "
+activate
+exit
+welcome-msg 5
+text "*** Permitido o uso somente para pessoas autorizadas ***"
+activate
+exit
+welcome-msg 6
+text " "
+activate
+exit
+welcome-msg 7
+text "  A utilizacao indevida ou a operacao que exceda o nivel de autorizacao"
+activate
+exit
+welcome-msg 8
+text "  permitido estara sujeita a monitoramento."
+activate
+exit
+welcome-msg 9
+text " "
+activate
+exit
+welcome-msg 10
+text "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+activate
+exit
+hostname "cl-rt-cas-0001-clientex-01"
+configuration-version 0
+username administrator name test
+username administrator password test
+bind interface gigabitethernet 0/0.11 voip
+bind vrf all-vrfs management-servers
+exit
+configure data
+access-list InWAN remark "-------------------------------------"
+access-list InWAN remark "obrigatoria para protecao do roteador"
+access-list InWAN permit ip 200.200.200.200 0.0.0.31 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.201.0 0.0.0.15 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.202 0.0.0.15 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.203 0.0.0.15 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.204 0.0.0.31 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.205 0.0.0.31 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.206 0.0.0.31 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.207 0.0.0.31 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.208 0.0.0.31 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.209.0 0.0.0.255 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.210.0 0.0.0.255 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.211 0.0.0.255 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.212 0.0.0.31 host 200.125.78.29
+access-list InWAN permit ip 200.200.200.213.0.0.15 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.214 0.0.0.15 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.215 0.0.0.15 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.216 0.0.0.31 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.217 0.0.0.31 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.218 0.0.0.31 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.219 0.0.0.31 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.220 0.0.0.31 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.221.0 0.0.0.255 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.222.0 0.0.0.255 host 200.125.78.30
+access-list InWAN permit ip 200.200.200.223 0.0.0.255 host 200.125.78.30
+access-list InWAN permit ip host 200.125.78.30 host 200.125.78.29
+access-list InWAN permit ip host 200.125.78.30 host 200.125.78.30
+access-list InWAN deny ip any host 200.125.78.29
+access-list InWAN deny ip any host 200.125.78.30
+access-list InWAN deny ip any host 200.125.78.31
+access-list InWAN permit ip any any
+access-list InWAN remark "-------------------------------------"
+ip vrf DADOS
+ip vrf DADOS enable rip
+interface GigabitEthernet 0/0
+no ip address
+mtu auto
+desc "Link Cliente Internet link + Voz"
+no ipv6 enable
+speed auto
+duplex auto
+no service dhcp
+ip dns server static
+no shutdown
+exit
+interface GigabitEthernet 0/0.11
+ip address 10.55.235.181 255.255.255.252
+mtu auto
+desc "Cliente Link Voz 0000000002"
+no ipv6 enable
+no service dhcp
+ip dns server static
+no napt
+no firewall enable
+no shutdown
+exit
+interface GigabitEthernet 0/0.10
+ip address 200.125.78.29 255.255.255.252
+mtu auto
+desc "Cliente Internet Link 0000000001"
+no ipv6 enable
+no service dhcp
+ip dns server static
+ip vrf forwarding DADOS
+no napt
+ip access-group InWAN in
+no firewall enable
+no shutdown
+exit
+interface GigabitEthernet 1/1
+speed auto
+duplex auto
+switchport mode trunk
+switchport trunk native vlan 10
+no shutdown
+exit
+interface GigabitEthernet 1/2
+shutdown
+exit
+interface GigabitEthernet 1/3
+shutdown
+exit
+interface GigabitEthernet 1/4
+no shutdown
+exit
+interface VLAN 1
+ip address 192.168.0.1 255.255.255.0
+mtu auto
+desc "LAN switch VLAN 1"
+no service dhcp
+ip dns server static
+no napt
+no firewall enable
+no link-state monitor
+no shutdown
+exit
+interface VLAN 10
+ip address 200.125.78.30 255.255.255.248
+mtu auto
+desc "Ambiente do Cliente"
+no service dhcp
+ip dns server static
+ip vrf forwarding DADOS
+no napt
+no firewall enable
+no link-state monitor
+no shutdown
+exit
+router rip
+version 2
+network GigabitEthernet 0/0.11
+exit
+router rip vrf DADOS
+version 2
+network GigabitEthernet 0/0.10
+network VLAN 10
+passive-interface vlan 10
+exit
+ip nat translation udp-timeout 120
+ip nat translation tcp-timeout 900
+ip nat translation icmp-timeout 6
+access-list SBC permit ip any host 177.77.77.7
+qos match-map output "VOIP" GigabitEthernet 0/0.11
+match access-list "SBC"
+set queue "VOIP"
+set dscp ef
+exit
+qos match-map output "DADOS" GigabitEthernet 0/0.10
+match any
+set queue "DADOS"
+exit
+qos service-map GigabitEthernet 0/0 output
+bandwidth automatic
+queue "default"
+priority 4
+exit
+queue "VOIP"
+priority 0
+bandwidth 0 2048
+exit
+queue "DADOS"
+priority 4
+bandwidth 0 10240
+exit
+exit
+exit
+exit
