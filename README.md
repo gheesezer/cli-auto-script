@@ -1,5 +1,5 @@
 # AutoScript
-Configuration Automation for Telecommunications Equipment
+Configuration automation for telecommunications equipment
 
 
 This software has the functionality of generating a configuration script and exporting to a .txt file, 
