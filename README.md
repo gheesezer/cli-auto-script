@@ -16,6 +16,14 @@ O equipamento de teste possui uma taxa de transmissão de 115200 na porta serial
 
 O ambiente de desenvolvimento e testes foi Windows e os diretórios e comandos importados para o sistema precisam ser alterados para outro sistema operacional caso necessário.
 
+![](https://i.imgur.com/Gj1cctE.png)
+
+![](https://i.imgur.com/uUlheov.png)
+
+![](https://i.imgur.com/9opI53u.png)
+
+![](https://i.imgur.com/WtFEt0s.png)
+
 Bibliotecas utilizadas:
 https://github.com/pyserial/pyserial
 
