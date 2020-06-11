@@ -30,12 +30,9 @@ O ambiente de desenvolvimento e testes foi Windows e os diretórios e comandos i
 
 
 Bibliotecas utilizadas:
-
 https://github.com/pyserial/pyserial
 
 
 Softwares utilizados:
-
 https://www.putty.org/
-
 http://tftpd32.jounin.net/tftpd32_download.html
