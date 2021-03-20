@@ -1,6 +1,6 @@
 # AutoScript
 
-Esta aplicação foi desenvolvida para facilitar o processo de atualização e configuração em equipamentos de telecom (roteadores,switches, modem's...) e pode ser adaptada para qualquer tipo de conexão serial através de CLI.
+Esta aplicação CLI foi desenvolvida durante meus estudos com programação e utilizada para facilitar o processo de atualização e configuração para equipamentos de telecom (roteadores,switches, modem's...) em meu trabalho na época, pode ser adaptada para qualquer tipo de conexão serial através de CLI.
 
 Este software tem a funcionalidade de gerar um script de configuração a partir de um modelo definido e exportá-lo para um arquivo .txt,
 após a validação da configuração, um número de porta serial é solicitado, onde será aplicado as configurações geradas. 
