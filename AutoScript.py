@@ -5,7 +5,7 @@ import re
 import os
 import sys
 import time
-import serial  # LICENSE PYSERIAL
+import serial
 
 
 class Tools:
